@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="icon" href="./favicon.ico" />
+    <!-- <meta name="viewport" content="width=device-width, initial-scale=1.0" /> -->
+    <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no">
+    <title>Vite App</title>
+    <script type="module" crossorigin src="./assets/index.6af7fc65.js"></script>
+    <link rel="stylesheet" href="./assets/index.3c545e6f.css">
+  </head>
+  <script>
+    // 适配
+    (function (doc, win) {
+        var docEl = doc.documentElement,
+            resizeEvt = 'orientationchange' in window ? 'orientationchange' : 'resize',
+            recalc = function () {
+                var clientWidth = docEl.clientWidth;
+                if (!clientWidth) return;
+                clientWidth = clientWidth > 750 ? 750 : clientWidth;
+                clientWidth = clientWidth <= 320 ? 320 : clientWidth;
+                docEl.style.fontSize = 100 * (clientWidth / 750) + 'px';
+
+                var html = document.getElementsByTagName('html')[0];
+                var settedFs = settingFs = parseInt(100 * (clientWidth / 750));
+                var whileCount = 0;
+                while (true) {
+                    var realFs = parseInt(window.getComputedStyle(html).fontSize);
+                    var delta = realFs - settedFs;
+                    //不相等
+                    if (Math.abs(delta) >= 1) {
+                        if (delta > 0)
+                            settingFs--;
+                        else
+                            settingFs++;
+                        html.setAttribute('style', 'font-size:' + settingFs + 'px!important');
+                    } else
+                        break;
+                    if (whileCount++ > 100)
+                        break
+                }
+                document.getElementsByTagName('body')[0].style.visibility = "visible";
+            };
+        if (!doc.addEventListener) return;
+        win.addEventListener(resizeEvt, recalc, false);
+        doc.addEventListener('DOMContentLoaded', recalc, false);
+    })(document, window);    
+</script>
+  <body>
+    <div id="app"></div>
+    
+  </body>
+</html>
